@@ -4,8 +4,8 @@
 	<!-- Standard Meta -->
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="keywords" content="pacsDisplay, Monitor Calibration, DICOM GSDF">
-	<meta name="description" content="Homepage for pacsDisplay, an open source software for generating and installing DICOM grayscale LUTs, and for performing QC on DICOM-calibrated displays.">
+	<meta name="keywords" content="pacsDisplay, Monitor Calibration, Display Calibration, DICOM GSDF">
+	<meta name="description" content="Homepage for pacsDisplay, an open source project for generating and installing DICOM grayscale LUTs and for performing QC on DICOM-calibrated displays.">
 	<meta name="author" content="Nick Bevins, Mike Flynn">
 	<meta name="robots" content="index, follow">
 
@@ -29,7 +29,7 @@
 			<img class="topimage" src="images/pdlogobw.png" alt="pacsDisplay logo" />
 			<div>
 				<h1 class="cover">pacsDisplay</h1>
-				<p>Open source software for generating and installing DICOM grayscale LUTs and for performing QC on calibrated displays.</p>
+				<p>Open source project for generating and installing DICOM grayscale LUTs and for performing QC on DICOM-calibrated displays.</p>
 				<br>
 				<a href="download.html">Download for Windows (.zip)</a>
 				<br><br>
@@ -50,27 +50,36 @@
 
 <!-- Main content -->
 <div class="section mainbody">
-	<h3 class="divide">Background</h3>
-		<p>The applications in this software package include programs for generating and installing DICOM grayscale look up tables (LUTs), a program to display a grayscale quality control test patterns, and features to perform QC evaluations of calibrated displays. The present package release supports Microsoft Windows XP (32 bit), Windows 7 (32 and 64 bit), and Windows 10.</p>
-		
-		<p>For display calibration, look up tables (LUTs) intended for the make and model of displays used on your workstation need to be specified. The package distribution includes a LUT-Library with generic LUTs for various display models. This library is commonly searched to retrieve the required LUT. For display models that are not in the library, a gray palette needs to be obtained using a supported photometer. A LUT is then generated from the measured palette and a configuration file is edited.</p>
-		
-		<p>For QC measures, the essential tools are distributed in a folder that does not require installation (pdQC). Typically this folder will be accessed from a USB drive or network storage where a menu application is executed to select the desired application.</p>
+	<h3 class="divide">Description</h3>
+		<p>The applications in the pacsDisplay project include programs for generating and installing DICOM grayscale look up tables (LUTs), displaying grayscale quality control test patterns, measuring chromaticity and DICOM GSDF conformance, characterizing display uniformity, evaluating ambient lighting conditions, and measuring both luminance and illuminance. The current release supports Microsoft Windows 10/11 environments.</p>
+
+		<p>Quantitative photometric measurements are performed using supported photometers. The following meters are compatible: X-Rite i1Display Pro, NEC SpectraSensor Pro, DisplayPro Plus, ColorMunki Display, i1Display Studio, Calibrite ColorChecker Display/Pro/Plus, and other rebranded meters.</p>
+
+		<p>A full description of the pacsDisplay modules can be found <a href="https://github.com/pacsdisplay/pacsdisplay/blob/master/docs/MODULES.md">here</a>.</p>
 
 	<h3 class="divide">Features and Release Updates</h3>
 
-		<p>The X-Rite i1DisplayPro is now the recommended device for use with pacsDisplay programs. For this meter, color coordinates are now routinely obtained for all luminance measures. The i1meter application has been added to reports both illuminance and luminance as well as color coordinates. The i1meter application allows measurement of both illuminance and luminance. For quick QC validation of gray scale calibration with lumResponse, the white point color coordinates are now measured and gray tracking is reported along with DICOM GSDF conformance. These meters are all compatible: X-Rite i1Display Pro, NEC SpectraSensor Pro, DisplayPro Plus, ColorMunki Display, i1Display Studio, Calibrite ColorChecker Display/Pro/Plus, and other rebranded meters.</p>
-	
-		<p>Version 5E updates the gtest and iQC software and adds the ambtest program to the pdQC toolset. The gtest program is now resizeable for full-display assessment. The iQC program is updated with three sizes of the AAPM Report 270 QC test patterns (sQC and pQC). The ambtest software displays a mostly-black window with a small, low-contrast test object for a user to identify. If the object is not seen, the user may want to recalibrate their display or adjust the ambient lighting. The contrast of the object is adjustable through key bindings.</p>
-	
-		<p>Version 5F updates the spotread application (v2.3.0) to support more photometers.</p>
-	
-		<p>Version 5G introduces uniLum to the pdQC toolset. This application allows the user to collect uniformity data for one, three, or eighteen gray levels. The application automatically analyzes the results for both the MLD and LUDM values and allows the user to export the results for importing into other applications. In addition, version 5G updates the ambtest application to use a bar pattern (rather than a circle) and allows the user to adjust by individual gray levels (rather than by percentage of maximum luminance). Lastly, version 5G makes a small change to the lumResponse save routine to eliminate unnecessary button clicks.</p>
+		<p>Version 6A of pacsDisplay is the first major update of the software in many years. It includes a complete overhaul of the distribution structure, moving away from Tcl Starpacks to Starkits with a shared interpreter. The distribution also features improved documentation on GitHub and an improved repository structure. New build scripts automate the generation of distribution packages. Release 6A includes only the pdQC toolset, which now includes the ability to load LUTs to the graphics card. Smaller changes within the applications include:
+		<ul>
+			<li>Support for measuring external displays (e.g., acquisition workstations) in both lumResponse and uniLum</li>
+			<li>Additional test patterns in iQC include the TG270-ULN test patterns</li>
+			<li>Corrected errors in lumResponse behavior when changing between measurement modes</li>
+			<li>Removed Lamb component from Luni values (but still included in MLD/LUDM calculations)</li>
+			<li>Shift+click copy feature to capture all displayed values in i1meter</li>
+		</ul>
 
-	<h3 class="divide">Open Source</h3>
-
-		<p>The development of pacsDisplay applications began in 2002. The first public package, Release 3H, was organized in 2006 and made available on request under the Gnu general public license. Since then, Henry Ford Health System has made use of the programs for enterprise PACS workstation and within radiology. Beginning with Package Release 5A, a more formal Open Source Project effort is being formed with software distributed from an Open Source repository at GitHub. The project roadmap includes new features for color calibration and ICC profiles.</p>
+		</p>
 	
+		<p>View the full history of updates <a href="https://github.com/pacsdisplay/pacsdisplay/blob/master/CHANGELOG.md">here</a>.</p>
+
+	<h3 class="divide">Background and Open Source</h3>
+
+		<p>The development of pacsDisplay applications began in 1999. The first public package, Release 3H, was organized in 2006 and made available on request under the Gnu general public license. Since then, Henry Ford Health has made use of the programs within its radiology department. Beginning with Package Release 5A, a more formal Open Source Project effort was formed with software distributed from an Open Source repository at GitHub.</p>
+
+		<p>View the complete code base and build your own version <a href="https://github.com/pacsdisplay/pacsdisplay">here</a>.</p>
+	
+	<h3 class="divide">Support</h3>
+
 		<p>Several tools in the current version use the spotread command line tool from <a href="https://www.argyllcms.com/">ArgyllCMS</a> to interface with photometers. If you have a meter supported by ArgyllCMS and would like to see it supported in pacsDisplay, please contact us. The authors of pacsDisplay are grateful to ArgyllCMS for the continued development of its product. If you find pacsDisplay helpful for your work, we strongly urge you to consider supporting ArgyllCMS.</p>  
 </div>
 
@@ -80,7 +89,7 @@
 	<div class="centeredtext mast">
 		<h3 class="mastdivide">Authors and Contributors</h3>
 
-		<p>This work was originally developed by Michael Flynn (<a href="https://github.com/mflynn57">@mflynn57</a>). Nicholas Bevins (<a href="https://github.com/nickbevins">@nickbevins</a>) is a contributing developer and has taken responsiblity for future updates and maintenance. Philip Tchou is a contributing developer.</p>
+		<p>This work was originally developed by Michael Flynn (<a href="https://github.com/mflynn57">@mflynn57</a>). Nicholas Bevins (<a href="https://github.com/nickbevins">@nickbevins</a>) is a contributing developer and has taken responsibility for future updates and maintenance. Philip Tchou is a contributing developer.</p>
 
 		<p>Review current issues and submit new ones <a href="https://github.com/pacsdisplay/pacsdisplay/issues">here</a>.</p>
 		
