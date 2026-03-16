@@ -30,6 +30,10 @@
 		<img class="unblock" src="images/ADSunblockProps.png" alt="Windows file properties showing unblock option" style="width:375px;">
 		<img class="unblock" src="images/ADSunblock.png" alt="Unblock button detail" style="width:275px;">
 	</div>
+
+	<p>If unblocking the zip file does not propagate to all the extracted files, you can run the following PowerShell command from the root of the extracted files:</p>
+	
+	<pre style="background:#f4f4f4; padding:10px; border-radius:4px; font-family:Consolas,monospace;"><code>Get-ChildItem -Path &quot;.&quot; -Recurse -File | Unblock-File -Verbose</code></pre>
 	
 	<br>
 	
