@@ -5,6 +5,7 @@
 :root {
 	--bg-dark: #222222;
 	--bg-light: #FFFFFF;
+	--bg-code: #EEEEEE;
 	--text-dark: #555555;
 	--text-light: #FFFFFF;
 	--text-medium: #AAAAAA;
@@ -52,9 +53,6 @@ h1.cover {
 	border-bottom: 1px solid var(--border-dark);
 }
 
-.divide.mast {
-	border-bottom: 1px solid var(--border-light);
-}
 
 .section {
 	padding: 1% 0%;
@@ -121,17 +119,6 @@ h1.cover {
 	border-style: solid;
 }
 
-.ambtest {
-	height: 100%;
-	padding: 0% 5%;
-	background: #000000;
-}
-
-.ambbox {
-	width: 5%;
-	padding-top: 100%;
-	background: #050505;
-}
 
 a:link, a:visited, a:active {
 	color: var(--link-light);
@@ -181,5 +168,12 @@ a:focus {
 
 .video-container iframe {
 	max-width: 100%;
+}
+
+.code-block {
+	background: var(--bg-code);
+	padding: 10px;
+	border-radius: 4px;
+	font-family: Consolas, monospace;
 }
 
