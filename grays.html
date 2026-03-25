@@ -234,10 +234,10 @@ Licensed under GNU General Public License v3.0
         <div class="modal-content">
             <div class="modal-title">Gray Level Tool - Instructions</div>
             <div class="modal-message">CONTROLS:
- - Left-click anywhere: Increase gray level by step size
- - Right-click anywhere: Decrease gray level by step size
- - Click the number: Type in a value (0-255)
- - Dropdown: Select step size (1, 5, or 15)
+ - Left-click/Scroll up/Up arrow: Increase gray level
+ - Right-click/Scroll down/Down arrow: Decrease gray level
+ - Click the gray level number: Type in a value (0-255)
+ - Dropdown menu: Select step size (1, 5, or 15)
  - Grid toggle (⌗): Show/hide 3x3 grid overlay
 
 USAGE:
@@ -295,6 +295,7 @@ URL PARAMETERS:
             if (gridVisible) gridOverlay.classList.add('active');
 
             // Background click handlers
+            background.addEventListener('wheel', handleWheel, { passive: false });
             background.addEventListener('click', handleBackgroundClick);
             background.addEventListener('contextmenu', handleBackgroundRightClick);
             background.addEventListener('mousedown', handleBackgroundMouseDown);
@@ -323,6 +324,17 @@ URL PARAMETERS:
             gridToggle.addEventListener('contextmenu', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
+            });
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    setGrayLevel(grayLevel + stepSize);
+                } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    setGrayLevel(grayLevel - stepSize);
+                }
             });
 
             // Reposition grid on window resize
@@ -432,6 +444,18 @@ URL PARAMETERS:
             e.preventDefault();
         }
 
+        function handleWheel(e) {
+            e.preventDefault();
+
+            const direction = e.deltaY > 0 ? 1 : -1;
+
+            if (direction > 0) {
+                setGrayLevel(grayLevel - stepSize);
+            } else {
+                setGrayLevel(grayLevel + stepSize);
+            }
+        }
+
         function handleInputBlur() {
             const value = parseInt(grayInput.value);
             if (!isNaN(value)) {
@@ -453,6 +477,14 @@ URL PARAMETERS:
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
         }
+
+        // Close modal when clicking the backdrop (outside modal-content)
+        document.addEventListener('click', (e) => {
+            const modal = document.getElementById('helpModal');
+            if (modal.style.display === 'block' && e.target === modal) {
+                closeModal('helpModal');
+            }
+        });
 
         // Initialize on load
         window.addEventListener('load', init);
