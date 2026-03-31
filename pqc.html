@@ -134,6 +134,17 @@ Implementation licensed under GNU General Public License v3.0
     <div class="help-icon" id="helpBtn" title="Help">?</div>
     <div class="reset-icon" id="resetBtn" title="Reset View">⟲</div>
 
+    <!-- DPI Warning Modal -->
+    <div id="dpiModal" class="modal" onclick="closeModal('dpiModal')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-title">Display Scaling Detected</div>
+            <div class="modal-message">Your OS is applying pixel scaling to this browser. The bar patterns of this test pattern may not be displayed at the correct frequency.</div>
+            <div class="modal-buttons">
+                <button class="modal-button" onclick="closeModal('dpiModal')">Ok</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Help Modal -->
     <div id="helpModal" class="modal">
         <div class="modal-content">
@@ -647,8 +658,14 @@ For a DICOM-conformant display, all modulation patterns should be visible across
             document.getElementById(modalId).style.display = 'none';
         }
 
+        function checkDpiScaling() {
+            if (window.devicePixelRatio !== 1) {
+                document.getElementById('dpiModal').style.display = 'block';
+            }
+        }
+
         // Initialize on load
-        window.addEventListener('load', init);
+        window.addEventListener('load', () => { init(); checkDpiScaling(); });
     </script>
 </body>
 </html>
